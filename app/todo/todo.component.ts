@@ -12,7 +12,7 @@ import { ObservableArray } from "tns-core-modules/data/observable-array";
 
 export class TodoComponent implements OnInit {
 
-	todos: any;
+	todos: Array<any>;
 
     constructor
     (
@@ -31,9 +31,7 @@ export class TodoComponent implements OnInit {
     		this.todos = JSON.parse(appSettings.getString('todos'));
     		console.log(JSON.stringify(this.todos))
     	}
-
     }
-
 
     addTodo(){
     	let options = {
@@ -58,11 +56,14 @@ export class TodoComponent implements OnInit {
 					status: 'pending'
 				}
 
-				appSettings.setString('todos', JSON.stringify(new_item))
 
+				appSettings.setString('todos', JSON.stringify(new_item))
 			    console.log(JSON.stringify(new_item));
     		}
     	});
     }
+
+
+    
 
 }
