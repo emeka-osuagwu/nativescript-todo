@@ -1,0 +1,29 @@
+.page {
+}
+
+.intro-con {
+	padding: 20;
+}
+
+
+.nameLabel {
+	color: red;
+}
+
+.page-logo {
+	width: 100;
+	margin-bottom: 10;
+}
+
+.intro-con {
+	text-align: center;
+	font-size: 14;
+}
+
+.todo_btn_1 {
+	width: 130;
+	margin-top: 10;
+	height: 40;
+	background-color: #7ccacb;
+	color: #fff;
+}
