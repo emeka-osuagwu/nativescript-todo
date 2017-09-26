@@ -56,7 +56,6 @@ export class TodoComponent implements OnInit {
 					status: 'pending'
 				}
 
-
 				appSettings.setString('todos', JSON.stringify(new_item))
 			    console.log(JSON.stringify(new_item));
     		}
