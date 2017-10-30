@@ -4,33 +4,34 @@ import * as appSettings from "application-settings";
 import { Component, OnInit } from "@angular/core";
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 
+import {TodoStore, Todo} from '../services/database';
+
+
+
 @Component({
     selector: "ns-app",
     templateUrl: "./todo/todo.component.html",
-    styleUrls: ['./todo/todo.component.css']
+    styleUrls: ['./todo/todo.component.css'],
+    providers: [TodoStore]
 })
+
 
 export class TodoComponent implements OnInit {
 
-	todos: Array<any>;
+	todos: ObservableArray<Todo>;
 
     constructor
     (
+        private todoStore: TodoStore
     ) 
     {
+        this.todoStore = todoStore;
+        let todos = JSON.parse(appSettings.getString('todos') || '[]');
+        // Normalize back into classes
+
     }
 
     ngOnInit() {
-
-    	if (appSettings.getString('todos') == '' || appSettings.getString('todos') == null) 
-    	{
-    		console.log('fvkdfjh')	
-    	}
-    	else
-    	{
-    		this.todos = JSON.parse(appSettings.getString('todos'));
-    		console.log(JSON.stringify(this.todos))
-    	}
     }
 
     addTodo(){
@@ -50,14 +51,16 @@ export class TodoComponent implements OnInit {
     		}
     		else
     		{    			   
-				var new_item = {
-					id: Math.floor(Math.random() * 10000) + 1,
-					value: result.text,
-					status: 'pending'
-				}
+				// var new_item = {
+				// 	id: Math.floor(Math.random() * 10000) + 1,
+				// 	value: result.text,
+				// 	status: 'pending'
+				// }
 
-				appSettings.setString('todos', JSON.stringify(new_item))
-			    console.log(JSON.stringify(new_item));
+                this.todos.push(new Todo(result.text));
+
+				appSettings.setString('todos', JSON.stringify(this.todos))
+			    console.log(JSON.stringify(this.todos));
     		}
     	});
     }
